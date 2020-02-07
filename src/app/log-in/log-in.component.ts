@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-log-in',
@@ -32,12 +33,15 @@ export class LogInComponent implements OnInit {
 
     this.http.post('http://localhost:3000/auth/sign_in', params, { observe: 'response' })
       .subscribe(res => {
-        console.log(res);
-        this.currentUser = res.body.data;
-        this.storeUserData(res.headers);
-        this.isLoggedIn = true;
-        this.router.navigate(['/']);
+        if (res && res["body"]) {
+          this.currentUser = res["body"]["data"];
+          this.storeUserData(res["headers"]);
+          this.isLoggedIn = true;
+          this.router.navigate(['/']);
+        }
       })
+
+    return;
   }
 
   // TODO: Use mixin

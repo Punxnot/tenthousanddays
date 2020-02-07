@@ -118,16 +118,20 @@ export class AppComponent {
     let dd = maxDate.getDate();
     let mm = maxDate.getMonth()+1;
     let yyyy = maxDate.getFullYear();
+    let ddString = dd.toString();
+    let mmString = mm.toString();
+    let yyyyString = yyyy.toString();
+    let maxDateString = "";
 
     if (dd < 10) {
-      dd = '0' + dd.toFixed(2);
+      ddString = '0' + ddString;
     }
 
     if (mm < 10) {
-      mm = '0' + mm.toFixed(2);
+      mmString = '0' + mmString;
     }
 
-    maxDate = yyyy + '-' + mm + '-' + dd;
-    document.getElementById("birth-date").setAttribute("max", maxDate);
+    maxDateString = yyyyString + '-' + mmString + '-' + ddString;
+    document.getElementById("birth-date").setAttribute("max", maxDateString);
   }
 }
