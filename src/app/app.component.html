@@ -1,0 +1,40 @@
+<div class="page-container">
+  <div class="content" *ngIf="!loading">
+    <header class="flex-container">
+      <h2 class="logo">
+        {{title}}
+      </h2>
+      <nav class="flex-container">
+        <span *ngIf="isLoggedIn()">Hello, {{currentUser.nickname}}</span>
+        <button class="btn btn-logout" (click)="logOut()" *ngIf="isLoggedIn()">Log Out</button>
+
+        <a routerLink="/log-in" routerLinkActive="active" *ngIf="!isLoggedIn()">Log In</a>
+      </nav>
+    </header>
+
+    <main class="flex-container">
+      <div class="column wiki-search">
+        <input type="text" [(ngModel)]="wikiQuery" placeholder="Type your query">
+        <button (click)="searchItems()">Search Wiki Items</button>
+
+        <img *ngIf="searchImage" [src]="searchImage" width="300">
+        <div *ngIf="searchResult">{{searchResult}}</div>
+      </div>
+
+      <div class="column age-search">
+        <input type="date" id="birth-date" name="birth-date"
+               min="1900-01-01"
+               [(ngModel)]="ageQuery">
+        <button (click)="searchAge()">Search Age</button>
+
+        <div *ngIf="ageDescription">{{ageDescription}}</div>
+        <div *ngIf="currentEventTitle">{{currentEventTitle}}</div>
+        <div *ngIf="currentEventDescription">{{currentEventDescription}}</div>
+      </div>
+    </main>
+  </div>
+
+  <span class="content" *ngIf="loading">Loading...</span>
+
+  <router-outlet></router-outlet>
+</div>
