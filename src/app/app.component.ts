@@ -42,7 +42,7 @@ export class AppComponent {
       'uid': sessionStorage.getItem("uid")
     });
 
-    this.http.delete('http://localhost:3000/auth/sign_out', {headers: headers})
+    this.http.delete('https://narkom-api.herokuapp.com/auth/sign_out', {headers: headers})
       .subscribe(res => {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("client");
@@ -60,7 +60,7 @@ export class AppComponent {
         'uid': sessionStorage.getItem("uid")
       });
 
-      this.http.get('http://localhost:3000/auth/validate_token', {headers: headers, observe: 'response'})
+      this.http.get('https://narkom-api.herokuapp.com/auth/validate_token', {headers: headers, observe: 'response'})
         .subscribe(res => {
           if (res && res["body"]) {
             this.currentUser = res["body"]["data"];
@@ -89,7 +89,7 @@ export class AppComponent {
   searchItems() {
     let params = new HttpParams().set("query", this.wikiQuery);
 
-    this.http.get('http://localhost:3000/search/items', {params: params})
+    this.http.get('https://narkom-api.herokuapp.com/search/items', {params: params})
       .subscribe(res => {
         this.searchResult = res["text"];
         this.searchImage = res["image"];
@@ -99,7 +99,7 @@ export class AppComponent {
   searchAge() {
     let params = new HttpParams().set("query", this.ageQuery);
 
-    this.http.get('http://localhost:3000/search/age', {params: params})
+    this.http.get('https://narkom-api.herokuapp.com/search/age', {params: params})
       .subscribe(res => {
         if (res) {
           this.ageDescription = res["age_description"];
