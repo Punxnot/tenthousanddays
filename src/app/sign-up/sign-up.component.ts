@@ -5,13 +5,15 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-log-in',
-  templateUrl: './log-in.component.html',
-  styleUrls: ['./log-in.component.scss']
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss']
 })
-export class LogInComponent implements OnInit {
+export class SignUpComponent implements OnInit {
   isLoggedIn;
   currentUser;
+  userName: string;
+  userNickname: string;
   userEmail: string;
   userPassword: string;
 
@@ -26,12 +28,14 @@ export class LogInComponent implements OnInit {
     }
   }
 
-  logIn(): Observable<any> {
+  signUp(): Observable<any> {
     const params = new HttpParams()
-      .set('email', 'user@example.com')
-      .set('password', 'qweqwe');
+      .set('name', this.userName)
+      .set('nickname', this.userNickname)
+      .set('email', this.userEmail)
+      .set('password', this.userPassword);
 
-    this.http.post('https://narkom-api.herokuapp.com/auth/sign_in', params, { observe: 'response' })
+    this.http.post('https://narkom-api.herokuapp.com/auth', params, { observe: 'response' })
       .subscribe(res => {
         if (res && res["body"]) {
           this.currentUser = res["body"]["data"];

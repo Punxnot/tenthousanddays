@@ -6,17 +6,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogInComponent } from './log-in/log-in.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
 
 const appRoutes: Routes = [
-  { path: 'log-in', component: LogInComponent }
+  { path: 'log-in', component: LogInComponent },
+  { path: 'sign-up', component: SignUpComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    LogInComponent
+    LogInComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

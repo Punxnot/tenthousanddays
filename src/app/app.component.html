@@ -9,10 +9,11 @@
         <button class="btn btn-logout" (click)="logOut()" *ngIf="isLoggedIn()">Log Out</button>
 
         <a routerLink="/log-in" routerLinkActive="active" *ngIf="!isLoggedIn()">Log In</a>
+        <a routerLink="/sign-up" routerLinkActive="active" *ngIf="!isLoggedIn()">Sign Up</a>
       </nav>
     </header>
 
-    <main class="flex-container">
+    <main class="flex-container" *ngIf="isLoggedIn()">
       <div class="column wiki-search">
         <input type="text" [(ngModel)]="wikiQuery" placeholder="Type your query">
         <button (click)="searchItems()">Search Wiki Items</button>

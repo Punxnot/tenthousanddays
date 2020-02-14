@@ -1,0 +1,7 @@
+<div class="sign-up-form" *ngIf="!isLoggedIn">
+  <input type="text" id="userName" placeholder="Your name" [(ngModel)]="userName">
+  <input type="text" id="userNickname" placeholder="Your nickname" [(ngModel)]="userNickname">
+  <input type="email" id="userEmail" placeholder="Your email" [(ngModel)]="userEmail">
+  <input type="password" id="userPassword" placeholder="Your password" [(ngModel)]="userPassword">
+  <button (click)="signUp()">Sign Up</button>
+</div>

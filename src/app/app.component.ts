@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'Narkom';
-  currentUser;
+  currentUser = {};
   userEmail: string;
   userPassword: string;
   loading = false;
@@ -31,9 +31,9 @@ export class AppComponent {
     this.validateToken();
   }
 
-  ngAfterViewInit() {
-    this.initDateField();
-  }
+  // ngAfterViewInit() {
+  //   this.initDateField();
+  // }
 
   logOut() {
     const headers = new HttpHeaders({
