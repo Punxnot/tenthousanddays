@@ -1,5 +1,5 @@
 <div class="log-in-form" *ngIf="!isLoggedIn">
   <input type="email" id="userEmail" placeholder="Your email" [(ngModel)]="userEmail">
   <input type="password" id="userPassword" placeholder="Your password" [(ngModel)]="userPassword">
-  <button (click)="logIn()">Log In</button>
+  <button class="btn" (click)="logIn()">Log In</button>
 </div>

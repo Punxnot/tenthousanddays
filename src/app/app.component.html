@@ -16,7 +16,7 @@
     <main class="flex-container" *ngIf="isLoggedIn()">
       <div class="column wiki-search">
         <input type="text" [(ngModel)]="wikiQuery" placeholder="Type your query">
-        <button (click)="searchItems()">Search Wiki Items</button>
+        <button class="btn search-btn" (click)="searchItems()">Search Wiki Items</button>
 
         <img *ngIf="searchImage" [src]="searchImage" width="300">
         <div *ngIf="searchResult">{{searchResult}}</div>
@@ -26,7 +26,7 @@
         <input type="date" id="birth-date" name="birth-date"
                min="1900-01-01"
                [(ngModel)]="ageQuery">
-        <button (click)="searchAge()">Search Age</button>
+        <button class="btn search-btn" (click)="searchAge()">Search Age</button>
 
         <div *ngIf="ageDescription">{{ageDescription}}</div>
         <div *ngIf="currentEventTitle">{{currentEventTitle}}</div>
