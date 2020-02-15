@@ -28,8 +28,8 @@ export class LogInComponent implements OnInit {
 
   logIn(): Observable<any> {
     const params = new HttpParams()
-      .set('email', 'user@example.com')
-      .set('password', 'qweqwe');
+      .set('email', this.userEmail)
+      .set('password', this.userPassword);
 
     this.http.post('https://narkom-api.herokuapp.com/auth/sign_in', params, { observe: 'response' })
       .subscribe(res => {
