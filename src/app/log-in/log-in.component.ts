@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-log-in',
@@ -31,7 +32,7 @@ export class LogInComponent implements OnInit {
       .set('email', this.userEmail)
       .set('password', this.userPassword);
 
-    this.http.post('https://narkom-api.herokuapp.com/auth/sign_in', params, { observe: 'response' })
+    this.http.post(`${environment.apiUrl}/auth/sign_in`, params, { observe: 'response' })
       .subscribe(res => {
         if (res && res["body"]) {
           this.currentUser = res["body"]["data"];

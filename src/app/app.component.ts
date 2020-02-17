@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs';
+import { environment } from './../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -42,7 +43,7 @@ export class AppComponent {
       'uid': sessionStorage.getItem("uid")
     });
 
-    this.http.delete('https://narkom-api.herokuapp.com/auth/sign_out', {headers: headers})
+    this.http.delete(`${environment.apiUrl}/auth/sign_out`, {headers: headers})
       .subscribe(res => {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("client");
@@ -51,6 +52,7 @@ export class AppComponent {
   }
 
   validateToken(): Observable<any> {
+    console.log(environment.apiUrl);
     if (!!sessionStorage.getItem("token")) {
       this.loading = true;
 
@@ -60,7 +62,7 @@ export class AppComponent {
         'uid': sessionStorage.getItem("uid")
       });
 
-      this.http.get('https://narkom-api.herokuapp.com/auth/validate_token', {headers: headers, observe: 'response'})
+      this.http.get(`${environment.apiUrl}/auth/validate_token`, {headers: headers, observe: 'response'})
         .subscribe(res => {
           if (res && res["body"]) {
             this.currentUser = res["body"]["data"];
@@ -89,7 +91,7 @@ export class AppComponent {
   searchItems() {
     let params = new HttpParams().set("query", this.wikiQuery);
 
-    this.http.get('https://narkom-api.herokuapp.com/search/items', {params: params})
+    this.http.get(`${environment.apiUrl}/search/items`, {params: params})
       .subscribe(res => {
         this.searchResult = res["text"];
         this.searchImage = res["image"];
@@ -99,7 +101,7 @@ export class AppComponent {
   searchAge() {
     let params = new HttpParams().set("query", this.ageQuery);
 
-    this.http.get('https://narkom-api.herokuapp.com/search/age', {params: params})
+    this.http.get(`${environment.apiUrl}/search/age`, {params: params})
       .subscribe(res => {
         if (res) {
           this.ageDescription = res["age_description"];
