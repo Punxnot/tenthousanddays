@@ -12,17 +12,22 @@ import { environment } from './../environments/environment';
 })
 export class AppComponent {
   title = 'Narkom';
-  currentUser = {};
+  nickname = "";
   userEmail: string;
   userPassword: string;
   loading = false;
   wikiQuery: string;
   ageQuery: string;
   searchResult: string;
+  searchImage: string;
+  searchItemsLoading = false;
   currentEventTitle: string;
   currentEventDescription: string;
   ageDescription: string;
-  searchImage: string;
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
 
   constructor(private http: HttpClient) {
 
@@ -65,7 +70,7 @@ export class AppComponent {
       this.http.get(`${environment.apiUrl}/auth/validate_token`, {headers: headers, observe: 'response'})
         .subscribe(res => {
           if (res && res["body"]) {
-            this.currentUser = res["body"]["data"];
+            this.nickname = res["body"]["data"]["nickname"];
             this.storeUserData(res["headers"]);
           }
           this.loading = false;
@@ -89,12 +94,14 @@ export class AppComponent {
   }
 
   searchItems() {
+    this.searchItemsLoading = true;
     let params = new HttpParams().set("query", this.wikiQuery);
 
     this.http.get(`${environment.apiUrl}/search/items`, {params: params})
       .subscribe(res => {
         this.searchResult = res["text"];
         this.searchImage = res["image"];
+        this.searchItemsLoading = false;
       })
   }
 
@@ -104,10 +111,17 @@ export class AppComponent {
     this.http.get(`${environment.apiUrl}/search/age`, {params: params})
       .subscribe(res => {
         if (res) {
-          this.ageDescription = res["age_description"];
-          if (res["events"] && res["events"]["length"]) {
+          if (res["age_description"] && res["events"] && res["events"]["length"]) {
+            this.ageDescription = res["age_description"];
             this.currentEventTitle = res["events"][0]["title"];
             this.currentEventDescription = res["events"][0]["description"];
+          } else {
+            this.days = res["age_numbers"]["days"];
+            this.hours = res["age_numbers"]["hours"];
+            this.minutes = res["age_numbers"]["minutes"];
+            this.seconds = res["age_numbers"]["seconds"];
+
+            this.initCounters();
           }
         }
       })
@@ -135,5 +149,19 @@ export class AppComponent {
 
     maxDateString = yyyyString + '-' + mmString + '-' + ddString;
     document.getElementById("birth-date").setAttribute("max", maxDateString);
+  }
+
+  initCounters() {
+    setInterval(() => {
+      this.seconds++;
+    }, 1000);
+
+    setInterval(() => {
+      this.minutes++;
+    }, 60000);
+
+    setInterval(() => {
+      this.hours++;
+    }, 3600000);
   }
 }

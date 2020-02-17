@@ -5,7 +5,7 @@
         {{title}}
       </h2>
       <nav class="flex-container">
-        <span *ngIf="isLoggedIn()">Hello, {{currentUser["nickname"]}}</span>
+        <span *ngIf="isLoggedIn()">Hello, {{nickname}}</span>
         <button class="btn btn-logout" (click)="logOut()" *ngIf="isLoggedIn()">Log Out</button>
 
         <a routerLink="/log-in" routerLinkActive="active" *ngIf="!isLoggedIn()">Log In</a>
@@ -15,22 +15,35 @@
 
     <main class="flex-container" *ngIf="isLoggedIn()">
       <div class="column wiki-search">
-        <input type="text" [(ngModel)]="wikiQuery" placeholder="Type your query">
+        <input type="text" [(ngModel)]="wikiQuery" (keyup.enter)="searchItems()" placeholder="Type your query">
         <button class="btn search-btn" (click)="searchItems()">Search Wiki Items</button>
 
-        <img *ngIf="searchImage" [src]="searchImage" width="300">
-        <div *ngIf="searchResult">{{searchResult}}</div>
+        <div class="search-items-result" *ngIf="!searchItemsLoading">
+          <img *ngIf="searchImage" [src]="searchImage" width="300">
+          <div *ngIf="searchResult">{{searchResult}}</div>
+        </div>
+
+        <div class="loader" *ngIf="searchItemsLoading"></div>
       </div>
 
       <div class="column age-search">
         <input type="date" id="birth-date" name="birth-date"
                min="1900-01-01"
-               [(ngModel)]="ageQuery">
+               [(ngModel)]="ageQuery"
+               (keyup.enter)="searchAge()">
         <button class="btn search-btn" (click)="searchAge()">Search Age</button>
 
         <div *ngIf="ageDescription">{{ageDescription}}</div>
         <div *ngIf="currentEventTitle">{{currentEventTitle}}</div>
         <div *ngIf="currentEventDescription">{{currentEventDescription}}</div>
+
+        <div class="age-numbers-container" *ngIf="days && hours && minutes && seconds">
+          <p>Today you are:</p>
+          <p><span class="age-value">{{days}}</span> days,</p>
+          <p><span class="age-value">{{hours}}</span> hours,</p>
+          <p><span class="age-value">{{minutes}}</span> minutes,</p>
+          <p><span class="age-value" id="seconds-counter">{{seconds}}</span> seconds</p>
+        </div>
       </div>
     </main>
   </div>
