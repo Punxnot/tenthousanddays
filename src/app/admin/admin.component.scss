@@ -1,0 +1,18 @@
+@import '../../assets/variables';
+
+.admin-form {
+  width: 400px;
+  margin: 0 auto;
+  text-align: center;
+
+  input {
+    margin-bottom: 20px;
+  }
+
+  textarea {
+    display: block;
+    width: 100%;
+    resize: vertical;
+    margin-bottom: 20px;
+  }
+}

@@ -53,11 +53,11 @@ export class AppComponent {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("client");
         sessionStorage.removeItem("uid");
+        sessionStorage.removeItem("isAdmin");
       });
   }
 
   validateToken(): Observable<any> {
-    console.log(environment.apiUrl);
     if (!!sessionStorage.getItem("token")) {
       this.loading = true;
 
@@ -71,7 +71,7 @@ export class AppComponent {
         .subscribe(res => {
           if (res && res["body"]) {
             this.nickname = res["body"]["data"]["nickname"];
-            this.storeUserData(res["headers"]);
+            this.storeUserData(res["headers"], res["body"]["data"]["is_admin"]);
           }
           this.loading = false;
         })
@@ -80,88 +80,17 @@ export class AppComponent {
   }
 
   // TODO: Use mixin
-  storeUserData(responseHeaders) {
+  storeUserData(responseHeaders, isAdmin) {
     const token = responseHeaders.get("access-token");
     const client = responseHeaders.get("client");
     const uid = responseHeaders.get("uid");
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('client', client);
     sessionStorage.setItem('uid', uid);
+    sessionStorage.setItem('isAdmin', isAdmin);
   }
 
   isLoggedIn() {
     return !!sessionStorage.getItem("token");
-  }
-
-  searchItems() {
-    this.searchItemsLoading = true;
-    let params = new HttpParams().set("query", this.wikiQuery);
-
-    this.http.get(`${environment.apiUrl}/search/items`, {params: params})
-      .subscribe(res => {
-        this.searchResult = res["text"];
-        this.searchImage = res["image"];
-        this.searchItemsLoading = false;
-      })
-  }
-
-  searchAge() {
-    let params = new HttpParams().set("query", this.ageQuery);
-
-    this.http.get(`${environment.apiUrl}/search/age`, {params: params})
-      .subscribe(res => {
-        if (res) {
-          if (res["age_description"] && res["events"] && res["events"]["length"]) {
-            this.ageDescription = res["age_description"];
-            this.currentEventTitle = res["events"][0]["title"];
-            this.currentEventDescription = res["events"][0]["description"];
-          } else {
-            this.days = res["age_numbers"]["days"];
-            this.hours = res["age_numbers"]["hours"];
-            this.minutes = res["age_numbers"]["minutes"];
-            this.seconds = res["age_numbers"]["seconds"];
-
-            this.initCounters();
-          }
-        }
-      })
-  }
-
-  initDateField() {
-    const minAge = 18;
-    let maxDate = new Date();
-    maxDate.setFullYear(maxDate.getFullYear() - minAge);
-    let dd = maxDate.getDate();
-    let mm = maxDate.getMonth()+1;
-    let yyyy = maxDate.getFullYear();
-    let ddString = dd.toString();
-    let mmString = mm.toString();
-    let yyyyString = yyyy.toString();
-    let maxDateString = "";
-
-    if (dd < 10) {
-      ddString = '0' + ddString;
-    }
-
-    if (mm < 10) {
-      mmString = '0' + mmString;
-    }
-
-    maxDateString = yyyyString + '-' + mmString + '-' + ddString;
-    document.getElementById("birth-date").setAttribute("max", maxDateString);
-  }
-
-  initCounters() {
-    setInterval(() => {
-      this.seconds++;
-    }, 1000);
-
-    setInterval(() => {
-      this.minutes++;
-    }, 60000);
-
-    setInterval(() => {
-      this.hours++;
-    }, 3600000);
   }
 }

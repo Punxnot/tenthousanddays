@@ -36,7 +36,7 @@ export class LogInComponent implements OnInit {
       .subscribe(res => {
         if (res && res["body"]) {
           this.currentUser = res["body"]["data"];
-          this.storeUserData(res["headers"]);
+          this.storeUserData(res["headers"], res["body"]["data"]["is_admin"]);
           this.isLoggedIn = true;
           this.router.navigate(['/']);
         }
@@ -46,12 +46,13 @@ export class LogInComponent implements OnInit {
   }
 
   // TODO: Use mixin
-  storeUserData(responseHeaders) {
+  storeUserData(responseHeaders, isAdmin) {
     const token = responseHeaders.get("access-token");
     const client = responseHeaders.get("client");
     const uid = responseHeaders.get("uid");
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('client', client);
     sessionStorage.setItem('uid', uid);
+    sessionStorage.setItem('isAdmin', isAdmin);
   }
 }

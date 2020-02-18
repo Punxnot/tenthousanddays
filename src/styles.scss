@@ -43,6 +43,16 @@ input[type=date] {
   font-size: 14px;
 }
 
+textarea {
+  padding: 10px;
+  border: 1px solid $contrast-primary;
+  border-radius: 4px;
+  background: transparent;
+  color: $grey-light;
+  outline: none;
+  font-size: 14px;
+}
+
 .btn {
   background-color: transparent;
   color: $contrast-primary;
