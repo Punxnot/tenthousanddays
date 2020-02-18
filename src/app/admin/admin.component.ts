@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
@@ -15,6 +15,7 @@ export class AdminComponent implements OnInit {
   eventEndDate;
   eventTitle;
   eventDescription;
+  isFlashShown = false;
 
   constructor(private http: HttpClient,
               private router: Router) { }
@@ -31,7 +32,6 @@ export class AdminComponent implements OnInit {
     const date2 = new Date(this.eventEndDate);
     const differenceInTime = date2.getTime() - date1.getTime();
     const differenceInDays = differenceInTime / (1000 * 3600 * 24);
-    console.log(differenceInDays);
 
     const data = {
       "days": differenceInDays,
@@ -43,8 +43,14 @@ export class AdminComponent implements OnInit {
 
     this.http.post(`${environment.apiUrl}/create/event`, data)
       .subscribe(res => {
-        console.log(res);
+        this.eventStartDate = null;
+        this.eventEndDate = null;
+        this.eventTitle = null;
+        this.eventDescription = null;
+        this.isFlashShown = true;
+        setTimeout(() => {
+          this.isFlashShown = false;
+        }, 3000);
       })
   }
-
 }

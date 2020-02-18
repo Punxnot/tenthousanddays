@@ -15,4 +15,23 @@
     resize: vertical;
     margin-bottom: 20px;
   }
+
+  .flash {
+    margin-top: 20px;
+    color: $contrast-secondary;
+    display: none;
+
+    &.shown {
+      display: block;
+      opacity: 0;
+      animation-name: fadeIn;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
