@@ -1,16 +1,4 @@
 <main class="flex-container">
-  <div class="column wiki-search">
-    <input type="text" [(ngModel)]="wikiQuery" (keyup.enter)="searchItems()" placeholder="Type your query">
-    <button class="btn search-btn" (click)="searchItems()">Search Wiki Items</button>
-
-    <div class="search-items-result" *ngIf="!searchItemsLoading">
-      <img *ngIf="searchImage" [src]="searchImage" width="300">
-      <div *ngIf="searchResult">{{searchResult}}</div>
-    </div>
-
-    <div class="loader" *ngIf="searchItemsLoading"></div>
-  </div>
-
   <div class="column age-search">
     <input type="date" id="birth-date" name="birth-date"
            min="1900-01-01"
@@ -18,16 +6,27 @@
            (keyup.enter)="searchAge()">
     <button class="btn search-btn" (click)="searchAge()">Search Age</button>
 
-    <div *ngIf="ageDescription">{{ageDescription}}</div>
-    <div *ngIf="currentEventTitle">{{currentEventTitle}}</div>
-    <div *ngIf="currentEventDescription">{{currentEventDescription}}</div>
+    <div class="age-results" *ngIf="!loading">
+      <div *ngIf="ageDescription">{{ageDescription}}</div>
+      <div *ngIf="currentEventDescription">{{currentEventDescription}}</div>
 
-    <div class="age-numbers-container" *ngIf="days && hours && minutes && seconds">
-      <p>Today you are:</p>
-      <p><span class="age-value">{{days}}</span> days,</p>
-      <p><span class="age-value">{{hours}}</span> hours,</p>
-      <p><span class="age-value">{{minutes}}</span> minutes,</p>
-      <p><span class="age-value" id="seconds-counter">{{seconds}}</span> seconds</p>
+      <div class="age-numbers-container" *ngIf="days && hours && minutes && seconds">
+        <p>Today you are:</p>
+        <p><span class="age-value">{{days}}</span> days,</p>
+        <p><span class="age-value">{{hours}}</span> hours,</p>
+        <p><span class="age-value">{{minutes}}</span> minutes,</p>
+        <p><span class="age-value" id="seconds-counter">{{seconds}}</span> seconds</p>
+      </div>
     </div>
+
+    <div class="loader" *ngIf="loading"></div>
+  </div>
+
+  <div class="column additional-info">
+    <div class="search-items-result" *ngIf="!loading && wikiText">
+      <img *ngIf="wikiImage" [src]="wikiImage" width="300">
+      <div>{{wikiText}}</div>
+    </div>
+    <div class="loader" *ngIf="loading"></div>
   </div>
 </main>

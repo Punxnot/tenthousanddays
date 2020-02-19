@@ -11,12 +11,7 @@ import { environment } from './../../environments/environment';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  wikiQuery: string;
   ageQuery: string;
-  searchResult: string;
-  searchImage: string;
-  searchItemsLoading = false;
-  currentEventTitle: string;
   currentEventDescription: string;
   ageDescription: string;
   days: number;
@@ -24,24 +19,18 @@ export class HomeComponent implements OnInit {
   minutes: number;
   seconds: number;
 
+  loading = false;
+  wikiImage: string;
+  wikiText: string;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-  }
 
-  searchItems() {
-    this.searchItemsLoading = true;
-    let params = new HttpParams().set("query", this.wikiQuery);
-
-    this.http.get(`${environment.apiUrl}/search/items`, {params: params})
-      .subscribe(res => {
-        this.searchResult = res["text"];
-        this.searchImage = res["image"];
-        this.searchItemsLoading = false;
-      })
   }
 
   searchAge() {
+    this.loading = true;
     let params = new HttpParams().set("query", this.ageQuery);
 
     this.http.get(`${environment.apiUrl}/search/age`, {params: params})
@@ -49,8 +38,12 @@ export class HomeComponent implements OnInit {
         if (res) {
           if (res["age_description"] && res["events"] && res["events"]["length"]) {
             this.ageDescription = res["age_description"];
-            this.currentEventTitle = res["events"][0]["title"];
             this.currentEventDescription = res["events"][0]["description"];
+
+            if (res["wiki"]) {
+              this.wikiText = res["wiki"]["text"];
+              this.wikiImage = res["wiki"]["image"];
+            }
           } else {
             this.days = res["age_numbers"]["days"];
             this.hours = res["age_numbers"]["hours"];
@@ -60,6 +53,8 @@ export class HomeComponent implements OnInit {
             this.initCounters();
           }
         }
+
+        this.loading = false;
       })
   }
 
