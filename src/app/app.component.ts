@@ -13,21 +13,7 @@ import { environment } from './../environments/environment';
 export class AppComponent {
   title = 'Narkom';
   nickname = "";
-  userEmail: string;
-  userPassword: string;
   loading = false;
-  wikiQuery: string;
-  ageQuery: string;
-  searchResult: string;
-  searchImage: string;
-  searchItemsLoading = false;
-  currentEventTitle: string;
-  currentEventDescription: string;
-  ageDescription: string;
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
 
   constructor(private http: HttpClient) {
 

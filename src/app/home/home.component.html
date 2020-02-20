@@ -4,18 +4,18 @@
            min="1900-01-01"
            [(ngModel)]="ageQuery"
            (keyup.enter)="searchAge()">
-    <button class="btn search-btn" (click)="searchAge()">Search Age</button>
+    <button class="btn search-btn" (click)="searchAge()">Искать</button>
 
     <div class="age-results" *ngIf="!loading">
       <div *ngIf="ageDescription">{{ageDescription}}</div>
       <div *ngIf="currentEventDescription">{{currentEventDescription}}</div>
 
       <div class="age-numbers-container" *ngIf="days && hours && minutes && seconds">
-        <p>Today you are:</p>
-        <p><span class="age-value">{{days}}</span> days,</p>
-        <p><span class="age-value">{{hours}}</span> hours,</p>
-        <p><span class="age-value">{{minutes}}</span> minutes,</p>
-        <p><span class="age-value" id="seconds-counter">{{seconds}}</span> seconds</p>
+        <p>Сегодня вам:</p>
+        <p><span class="age-value">{{days}}</span> дней,</p>
+        <p><span class="age-value">{{hours}}</span> часов,</p>
+        <p><span class="age-value">{{minutes}}</span> минут,</p>
+        <p><span class="age-value" id="seconds-counter">{{seconds}}</span> секунд</p>
       </div>
     </div>
 
@@ -27,6 +27,5 @@
       <img *ngIf="wikiImage" [src]="wikiImage" width="300">
       <div>{{wikiText}}</div>
     </div>
-    <div class="loader" *ngIf="loading"></div>
   </div>
 </main>

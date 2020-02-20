@@ -1,15 +1,15 @@
 <div class="page-container">
   <div class="content" *ngIf="!loading">
     <header class="flex-container">
-      <h2 class="logo">
+      <a routerLink="/" class="logo">
         {{title}}
-      </h2>
+      </a>
       <nav class="flex-container">
-        <span *ngIf="isLoggedIn()">Hello, {{nickname}}</span>
-        <button class="btn btn-logout" (click)="logOut()" *ngIf="isLoggedIn()">Log Out</button>
+        <span *ngIf="isLoggedIn()">Привет, {{nickname}}!</span>
+        <button class="btn btn-logout" (click)="logOut()" *ngIf="isLoggedIn()">Выход</button>
 
-        <a routerLink="/log-in" routerLinkActive="active" *ngIf="!isLoggedIn()">Log In</a>
-        <a routerLink="/sign-up" routerLinkActive="active" *ngIf="!isLoggedIn()">Sign Up</a>
+        <a class="btn" routerLink="/log-in" routerLinkActive="active" *ngIf="!isLoggedIn()">Вход</a>
+        <a class="btn" routerLink="/sign-up" routerLinkActive="active" *ngIf="!isLoggedIn()">Регистрация</a>
       </nav>
     </header>
   </div>
