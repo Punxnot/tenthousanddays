@@ -16,6 +16,11 @@ li {
   box-sizing: border-box;
 }
 
+ul {
+  list-style: none;
+  text-align: left;
+}
+
 .flex-container {
   display: flex;
   justify-content: space-between;

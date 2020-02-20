@@ -7,9 +7,6 @@
     <button class="btn search-btn" (click)="searchAge()">Искать</button>
 
     <div class="age-results" *ngIf="!loading">
-      <div *ngIf="ageDescription">{{ageDescription}}</div>
-      <div *ngIf="currentEventDescription">{{currentEventDescription}}</div>
-
       <div class="age-numbers-container" *ngIf="days && hours && minutes && seconds">
         <p>Сегодня вам:</p>
         <p><span class="age-value">{{days}}</span> дней,</p>
@@ -17,6 +14,9 @@
         <p><span class="age-value">{{minutes}}</span> минут,</p>
         <p><span class="age-value" id="seconds-counter">{{seconds}}</span> секунд</p>
       </div>
+
+      <div *ngIf="ageDescription">{{ageDescription}}</div>
+      <div *ngIf="currentEventDescription">В этом возрасте {{currentEventTitle}} {{currentEventDescription}}</div>
     </div>
 
     <div class="loader" *ngIf="loading"></div>

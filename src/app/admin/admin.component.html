@@ -1,7 +1,7 @@
 <div class="admin-form">
   <form id="add-event-form" (ngSubmit)="onSubmit()">
-    <input type="date" id="event-start-date" name="event-start-date" [(ngModel)]="eventStartDate" required>
-    <input type="date" id="event-end-date" name="event-end-date" [(ngModel)]="eventEndDate" required>
+    <input type="text" id="event-start-date" name="event-start-date" [(ngModel)]="eventStartDate" placeholder="дд/мм/гггг" pattern="\d{1,2}/\d{1,2}/\d{4}" required>
+    <input type="text" id="event-end-date" name="event-end-date" [(ngModel)]="eventEndDate" placeholder="дд/мм/гггг" pattern="\d{1,2}/\d{1,2}/\d{4}" required>
     <input type="text" id="event-title" name="event-title" [(ngModel)]="eventTitle" placeholder="Кто?" required>
     <textarea id="event-description" name="event-description" rows="8"
               [(ngModel)]="eventDescription" placeholder="Сделал что?" required></textarea>
@@ -10,3 +10,14 @@
 
   <div class="flash" [ngClass]="{'shown': isFlashShown }">Событие сохранено!</div>
 </div>
+
+<ul class="all-records" *ngIf="allRecords?.length">
+  <li *ngFor="let record of allRecords">
+    <div class="record-days"><b>{{record.days}}</b></div>
+    <ul>
+      <li *ngFor="let event of record.events">
+        <span>{{event.title}} {{event.description}}</span>
+      </li>
+    </ul>
+  </li>
+</ul>
