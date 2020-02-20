@@ -11,7 +11,7 @@ import { environment } from './../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Narkom';
+  title = 'narkom';
   nickname = "";
   loading = false;
 
