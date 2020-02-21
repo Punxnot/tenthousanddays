@@ -18,9 +18,9 @@ main {
 
 .age-numbers-container {
   margin: 20px 0;
-}
 
-.age-value {
-  font-weight: bold;
-  color: $contrast-primary;
+  p {
+    margin-top: 20px;
+    font-size: 20px;
+  }
 }

@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
+import { Ng2OdometerModule } from 'ng2-odometer';
 
 import { AppComponent } from './app.component';
 import { LogInComponent } from './log-in/log-in.component';
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    Ng2OdometerModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
