@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs';
+import { map, debounceTime, share } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 
 @Component({
@@ -18,16 +19,19 @@ export class HomeComponent implements OnInit {
   days: number;
   hours: number;
   minutes: number;
-  seconds: number;
   secondsCounter;
   minutesCounter;
   hoursCounter;
+  seconds = 0;
+  // secs = new Observable<any>(observer => {
+  //   setInterval(() => observer.next(this.seconds++), 1000);
+  // });
 
   loading = false;
   wikiImage: string;
   wikiText: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
 
