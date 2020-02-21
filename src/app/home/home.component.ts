@@ -23,9 +23,7 @@ export class HomeComponent implements OnInit {
   minutesCounter;
   hoursCounter;
   seconds = 0;
-  // secs = new Observable<any>(observer => {
-  //   setInterval(() => observer.next(this.seconds++), 1000);
-  // });
+  public number: number = 1000;
 
   loading = false;
   wikiImage: string;
@@ -86,9 +84,9 @@ export class HomeComponent implements OnInit {
       clearInterval(this.hoursCounter);
     }
 
-    this.secondsCounter = setInterval(() => {
-      this.seconds++;
-    }, 1000);
+    const interval$ = this.setIntervalObservable(1000);
+    const subscription = interval$
+                         .subscribe({ next: () => console.log('interval') });
 
     this.minutesCounter = setInterval(() => {
       this.minutes++;
@@ -99,4 +97,17 @@ export class HomeComponent implements OnInit {
     }, 3600000);
   }
 
+  setIntervalObservable(time) {
+    return {
+      subscribe: (observer) => {
+        this.secondsCounter = setInterval(() => { this.seconds += 1 }, 1000);
+        // Teardown logic here
+        return {
+          unsubscribe: () => {
+            clearInterval(this.secondsCounter);
+          }
+        }
+      }
+    };
+  }
 }
