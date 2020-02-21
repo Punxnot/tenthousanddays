@@ -19,11 +19,7 @@ export class HomeComponent implements OnInit {
   days: number;
   hours: number;
   minutes: number;
-  secondsCounter;
-  minutesCounter;
-  hoursCounter;
-  seconds = 0;
-  public number: number = 1000;
+  seconds: number;
 
   loading = false;
   wikiImage: string;
@@ -63,51 +59,9 @@ export class HomeComponent implements OnInit {
           this.hours = res["age_numbers"]["hours"];
           this.minutes = res["age_numbers"]["minutes"];
           this.seconds = res["age_numbers"]["seconds"];
-
-          this.initCounters();
         }
 
         this.loading = false;
       })
-  }
-
-  initCounters() {
-    if (this.secondsCounter) {
-      clearInterval(this.secondsCounter);
-    }
-
-    if (this.minutesCounter) {
-      clearInterval(this.minutesCounter);
-    }
-
-    if (this.hoursCounter) {
-      clearInterval(this.hoursCounter);
-    }
-
-    const interval$ = this.setIntervalObservable(1000);
-    const subscription = interval$
-                         .subscribe({ next: () => console.log('interval') });
-
-    this.minutesCounter = setInterval(() => {
-      this.minutes++;
-    }, 60000);
-
-    this.hoursCounter = setInterval(() => {
-      this.hours++;
-    }, 3600000);
-  }
-
-  setIntervalObservable(time) {
-    return {
-      subscribe: (observer) => {
-        this.secondsCounter = setInterval(() => { this.seconds += 1 }, 1000);
-        // Teardown logic here
-        return {
-          unsubscribe: () => {
-            clearInterval(this.secondsCounter);
-          }
-        }
-      }
-    };
   }
 }

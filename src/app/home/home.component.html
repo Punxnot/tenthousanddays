@@ -9,10 +9,10 @@
     <div class="age-results" *ngIf="!loading">
       <div class="age-numbers-container" *ngIf="days && hours && minutes && seconds">
         <h3>Сегодня вам:</h3>
-        <p><ng2-odometer [number]="days" [config]="{theme: 'train-station'}"></ng2-odometer> дней,</p>
-        <p><ng2-odometer [number]="hours" [config]="{theme: 'train-station'}"></ng2-odometer> часов,</p>
-        <p><ng2-odometer [number]="minutes" [config]="{theme: 'train-station'}"></ng2-odometer> минут,</p>
-        <p><ng2-odometer [number]="seconds" [config]="{theme: 'train-station'}"></ng2-odometer> секунд</p>
+        <p><ng2-odometer [number]="days" [config]="{theme: 'car'}"></ng2-odometer> дней,</p>
+        <p><ng2-odometer [number]="hours" [config]="{theme: 'car'}"></ng2-odometer> часов,</p>
+        <p><ng2-odometer [number]="minutes" [config]="{theme: 'car'}"></ng2-odometer> минут,</p>
+        <p><ng2-odometer [number]="seconds" [config]="{theme: 'car'}"></ng2-odometer> секунд</p>
       </div>
 
       <div *ngIf="ageDescription">{{ageDescription}}</div>
