@@ -40,6 +40,12 @@
   }
 }
 
+.record-days {
+  font-family: "Amatic SC", cursive;
+  font-size: 24px;
+  color: $contrast-secondary;
+}
+
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity: 1;}
