@@ -73,6 +73,15 @@ textarea {
   &:hover {
     background-color: $contrast-primary-hover;
   }
+
+  &.warning {
+    color: $red;
+    border: 1px solid $red;
+  }
+
+  & + .btn {
+    margin-left: 20px;
+  }
 }
 
 .flash {

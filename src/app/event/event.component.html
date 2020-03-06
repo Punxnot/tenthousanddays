@@ -1,11 +1,11 @@
 <div class="event-container flex-container" *ngIf="!isEditing">
-  <span (click)="editEvent()">{{event.title}} {{event.description}}</span>
+  <span (click)="editEvent()">{{event["title"]}} {{event["description"]}}</span>
   <div class="flash" [ngClass]="{'shown': isFlashShown }">Событие сохранено!</div>
 </div>
 
 <div class="edit-event-container" *ngIf="isEditing">
-  <input type="text" [(ngModel)]="event.title" required>
-  <textarea [(ngModel)]="event.description" required></textarea>
+  <input type="text" [(ngModel)]='event["title"]' required>
+  <textarea [(ngModel)]='event["description"]' required></textarea>
+  <button class="btn warning" (click)="dropChanges()">Отменить изменения</button>
   <button class="btn" (click)="saveEvent()">Сохранить изменения</button>
-  <button class="btn" (click)="dropChanges()">Отменить изменения</button>
 </div>
