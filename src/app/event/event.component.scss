@@ -1,0 +1,21 @@
+@import '../../assets/variables';
+
+.event-container {
+  span:hover {
+    outline: 1px dashed $grayce;
+  }
+
+  .flash {
+    margin-top: 0;
+  }
+}
+
+.edit-event-container {
+  textarea {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    resize: vertical;
+  }
+}

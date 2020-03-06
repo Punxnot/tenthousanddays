@@ -16,7 +16,8 @@
     <div class="record-days"><b>{{record.days}}</b></div>
     <ul>
       <li *ngFor="let event of record.events">
-        <span>{{event.title}} {{event.description}}</span>
+        <!-- <span>{{event.title}} {{event.description}}</span> -->
+        <app-event [event]="event"></app-event>
       </li>
     </ul>
   </li>

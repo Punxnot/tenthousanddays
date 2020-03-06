@@ -12,6 +12,7 @@ import { LogInComponent } from './log-in/log-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
+import { EventComponent } from './event/event.component';
 
 const appRoutes: Routes = [
   { path: 'log-in', component: LogInComponent },
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
     LogInComponent,
     SignUpComponent,
     AdminComponent,
-    HomeComponent
+    HomeComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,

@@ -75,6 +75,20 @@ textarea {
   }
 }
 
+.flash {
+  margin-top: 20px;
+  color: $contrast-secondary;
+  display: none;
+
+  &.shown {
+    display: block;
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+}
+
 .loader {
   border: 2px solid $grey-light;
   border-top: 2px solid $contrast-primary;
