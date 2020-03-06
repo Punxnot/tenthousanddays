@@ -17,8 +17,8 @@ export class EventComponent {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.oldTitle = this.event.title;
-    this.oldDescription = this.event.description;
+    this.oldTitle = this.event["title"];
+    this.oldDescription = this.event["description"];
   }
 
   editEvent() {
@@ -26,24 +26,24 @@ export class EventComponent {
   }
 
   dropChanges() {
-    this.event.title = this.oldTitle;
-    this.event.description = this.oldDescription;
+    this.event["title"] = this.oldTitle;
+    this.event["description"] = this.oldDescription;
     this.isEditing = false;
   }
 
   saveEvent() {
     const data = {
-      "id": this.event.id,
-      "title": this.event.title,
-      "description": this.event.description
+      "id": this.event["id"],
+      "title": this.event["title"],
+      "description": this.event["description"]
     };
 
     this.http.put(`${environment.apiUrl}/edit/event`, data)
       .subscribe(res => {;
         this.isEditing = false;
         this.isFlashShown = true;
-        this.oldTitle = res.title;
-        this.oldDescription = res.description;
+        this.oldTitle = res["title"];
+        this.oldDescription = res["description"];
         setTimeout(() => {
           this.isFlashShown = false;
         }, 3000);
